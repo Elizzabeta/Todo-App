@@ -1,5 +1,7 @@
 import React from 'react';
 import {Todos} from './Todos';
+import {AddTodo} from './AddTodo';
+//import uuid from 'uuid';
 
 class App extends React.Component {
   state = {
@@ -18,6 +20,16 @@ class App extends React.Component {
     })
   }
 
+  addTodo = (todo) => {
+    todo.id = Math.random();
+    let todos = [
+      ...this.state.todos,
+      todo];
+    this.setState({
+      todos
+    })
+  }
+
   render() {
     return (
       <div className="todo-app container">
@@ -25,6 +37,9 @@ class App extends React.Component {
         <Todos 
           todos={this.state.todos}
           deleteTodo={this.deleteTodo}
+          />
+        <AddTodo 
+          addTodo={this.addTodo}
           />
       </div>
     );
